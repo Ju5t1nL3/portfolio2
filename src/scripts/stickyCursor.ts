@@ -191,6 +191,7 @@ export class StickyCursorManager {
       x: rect.left + moveX,
       y: rect.top + moveY,
       duration: 0.1,
+      overwrite: "auto",
     });
   };
 }
