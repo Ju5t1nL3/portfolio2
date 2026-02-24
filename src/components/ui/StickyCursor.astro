@@ -1,0 +1,28 @@
+<div id="sticky-cursor" class="sticky-cursor" aria-hidden="true"></div>
+<style>
+  .sticky-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+
+    background-color: black;
+    border-radius: 50%;
+
+    pointer-events: none;
+    z-index: 9999;
+    will-change: transform, width, height, border-radius;
+    display: none;
+  }
+</style>
+<script>
+  import { StickyCursorManager } from "../../scripts/stickyCursor";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const cursorEl = document.getElementById("sticky-cursor");
+    if (cursorEl) {
+      new StickyCursorManager(cursorEl);
+    }
+  });
+</script>
