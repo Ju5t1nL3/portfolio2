@@ -3,18 +3,18 @@ import { $isSticky } from "../stores/cursorStore";
 
 const CURSOR_CONFIG = {
   duration: {
-    move: 0.1, // mouse follow delay
+    move: 0.2, // mouse follow delay
     enter: 0.3, // speed to stick to button
     leave: 0.3, // speed to snap back to dot
-    magnetic: 0.3, // speed of magnet
+    magnetic: 1, // speed of magnet
   },
   ease: {
     move: "power3",
     enter: "elastic.out(1, 0.75)",
     leave: "power2.out",
-    magnetic: "power2.out",
+    magnetic: "elastic.out(1, 0.3)",
   },
-  magneticStrength: 0.3, // higher = stiff
+  magneticStrength: 0.5, // higher = stiff
 };
 
 export class StickyCursorManager {
