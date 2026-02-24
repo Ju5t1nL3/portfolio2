@@ -1,20 +1,23 @@
 ---
 import astroLogo from "../assets/astro.svg";
 import background from "../assets/background.svg";
+import StickyWrapper from "./ui/StickyWrapper.astro";
 ---
 
 <div id="container">
   <img id="background" src={background.src} alt="" fetchpriority="high" />
   <main>
     <section id="hero">
-      <a href="https://astro.build"
-        ><img
-          src={astroLogo.src}
-          width="115"
-          height="48"
-          alt="Astro Homepage"
-        /></a
-      >
+      <StickyWrapper magnetic borderRadius="10" class="p-10">
+        <a href="https://astro.build"
+          ><img
+            src={astroLogo.src}
+            width="115"
+            height="48"
+            alt="Astro Homepage"
+          /></a
+        >
+      </StickyWrapper>
       <h1>
         To get started, open the <code><pre>src/pages</pre></code> directory in your
         project.
