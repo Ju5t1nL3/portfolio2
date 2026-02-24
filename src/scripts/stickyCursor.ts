@@ -24,6 +24,9 @@ export class StickyCursorManager {
   private isHovered: boolean = false;
   private cursorSize: number = 15;
 
+  private mouseX: number = 0;
+  private mouseY: number = 0;
+
   private xSet: gsap.QuickToFunc;
   private ySet: gsap.QuickToFunc;
 
@@ -49,6 +52,17 @@ export class StickyCursorManager {
     });
 
     this.init();
+  }
+
+  private rebuildQuickTo() {
+    this.xSet = gsap.quickTo(this.cursor, "x", {
+      duration: CURSOR_CONFIG.duration.move,
+      ease: CURSOR_CONFIG.ease.move,
+    });
+    this.ySet = gsap.quickTo(this.cursor, "y", {
+      duration: CURSOR_CONFIG.duration.move,
+      ease: CURSOR_CONFIG.ease.move,
+    });
   }
 
   private init() {
@@ -100,6 +114,9 @@ export class StickyCursorManager {
   }
 
   private onMouseMove = (e: MouseEvent) => {
+    this.mouseX = e.clientX;
+    this.mouseY = e.clientY;
+
     if (!this.isHovered) {
       this.xSet(e.clientX - this.cursorSize / 2);
       this.ySet(e.clientY - this.cursorSize / 2);
@@ -120,11 +137,20 @@ export class StickyCursorManager {
       y: rect.top,
       duration: CURSOR_CONFIG.duration.enter,
       ease: CURSOR_CONFIG.ease.enter,
+      onComplete: () => this.rebuildQuickTo(),
     });
   };
 
   private onStickyLeave = (target: HTMLElement) => {
     this.isHovered = false;
+
+    gsap.killTweensOf(this.cursor);
+    this.rebuildQuickTo();
+
+    gsap.set(this.cursor, {
+      x: this.mouseX - this.cursorSize / 2,
+      y: this.mouseY - this.cursorSize / 2,
+    });
 
     gsap.to(this.cursor, {
       width: this.cursorSize,
@@ -135,6 +161,7 @@ export class StickyCursorManager {
     });
 
     if (target.dataset.magnetic === "true") {
+      gsap.killTweensOf(target);
       gsap.to(target, {
         x: 0,
         y: 0,
