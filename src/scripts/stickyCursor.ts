@@ -160,12 +160,19 @@ export class StickyCursorManager {
   private onStickyLeave = (target: HTMLElement) => {
     this.isHovered = false;
 
+    const currentWidth = parseFloat(
+      gsap.getProperty(this.cursor, "width") as string,
+    );
+    const currentHeight = parseFloat(
+      gsap.getProperty(this.cursor, "height") as string,
+    );
+
     gsap.killTweensOf(this.cursor);
     this.rebuildQuickTo();
 
     gsap.set(this.cursor, {
-      x: this.mouseX - this.cursorSize / 2,
-      y: this.mouseY - this.cursorSize / 2,
+      x: this.mouseX - currentWidth / 2,
+      y: this.mouseY - currentHeight / 2,
     });
 
     gsap.to(this.cursor, {
