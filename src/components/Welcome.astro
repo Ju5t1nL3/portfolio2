@@ -5,10 +5,14 @@ import StickyWrapper from "./ui/StickyWrapper.astro";
 ---
 
 <div id="container">
-  <img id="background" src={background.src} alt="" fetchpriority="high" />
   <main>
     <section id="hero">
-      <StickyWrapper magnetic borderRadius="10" class="p-10">
+      <StickyWrapper borderRadius="20px" magnetic={true} class="p-10">
+        <h1 style="color: black; font-size: 4rem; font-weight: bold;">
+          HOVER ME
+        </h1>
+      </StickyWrapper>
+      <StickyWrapper magnetic borderRadius="10px" class="p-10">
         <a href="https://astro.build"
           ><img
             src={astroLogo.src}
@@ -18,10 +22,12 @@ import StickyWrapper from "./ui/StickyWrapper.astro";
           /></a
         >
       </StickyWrapper>
-      <h1>
-        To get started, open the <code><pre>src/pages</pre></code> directory in your
-        project.
-      </h1>
+      <StickyWrapper borderRadius="10px" class="">
+        <h1 class="overflow-visible">
+          To get started, open the <code><pre>src/pages</pre></code> directory in
+          your project.
+        </h1>
+      </StickyWrapper>
       <section id="links">
         <a class="button" href="https://docs.astro.build">Read our docs</a>
         <a href="https://astro.build/chat"
