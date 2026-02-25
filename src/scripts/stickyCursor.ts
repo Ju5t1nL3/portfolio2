@@ -129,6 +129,20 @@ export class StickyCursorManager {
     const rect = target.getBoundingClientRect();
     const radius = target.dataset.radius || "0px";
 
+    const shouldBlend = target.dataset.blend === "true";
+
+    const visualProps = shouldBlend
+      ? {
+          mixBlendMode: "difference",
+          backgroundColor: "white",
+          opacity: 1,
+        }
+      : {
+          mixBlendMode: "normal",
+          backgroundColor: "black",
+          opacity: 0.2,
+        };
+
     gsap.to(this.cursor, {
       width: rect.width,
       height: rect.height,
@@ -138,6 +152,8 @@ export class StickyCursorManager {
       duration: CURSOR_CONFIG.duration.enter,
       ease: CURSOR_CONFIG.ease.enter,
       onComplete: () => this.rebuildQuickTo(),
+      ...visualProps,
+      overwrite: "auto",
     });
   };
 
@@ -158,6 +174,10 @@ export class StickyCursorManager {
       borderRadius: "50%",
       duration: CURSOR_CONFIG.duration.leave,
       ease: CURSOR_CONFIG.ease.leave,
+      mixBlendMode: "difference",
+      backgroundColor: "white",
+      opacity: 1,
+      overwrite: "auto",
     });
 
     if (target.dataset.magnetic === "true") {
