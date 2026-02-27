@@ -1,0 +1,28 @@
+---
+import StickyWrapper from "../components/ui/StickyWrapper.astro";
+import astroLogo from "../assets/astro.svg";
+---
+
+<h1 class="text-[6rem] font-bold text-[#A4A4F4]">JUSTIN LE</h1>
+<StickyWrapper
+  blendMode={false}
+  borderRadius="20px"
+  magnetic={false}
+  class="p-10"
+>
+  <h1 style="font-size: 4rem; font-weight: bold; line-height: 1;">HOVER ME</h1>
+</StickyWrapper>
+<StickyWrapper borderRadius="20px" magnetic={true} class="p-10">
+  <h1 style="font-size: 4rem; font-weight: bold;">HOVER ME</h1>
+</StickyWrapper>
+
+<StickyWrapper magnetic borderRadius="10px" class="p-10" blendMode={false}>
+  <a href="https://astro.build"
+    ><img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" /></a
+  >
+</StickyWrapper>
+<StickyWrapper borderRadius="20px" magnetic={false} class="p-10">
+  <a href="https://astro.build" class="z-10000"
+    ><img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" /></a
+  >
+</StickyWrapper>
