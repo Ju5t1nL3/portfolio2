@@ -17,11 +17,11 @@ const characters = text.split("");
   data-delay={delay}
 >
   {
-    characters.map((char) => {
+    characters.map((char) => (
       <span aria-hidden="true" class="falling-char">
         {char === " " ? "\u00A0" : char}
-      </span>;
-    })
+      </span>
+    ))
   }
 </h1>
 <style>
@@ -39,7 +39,8 @@ const characters = text.split("");
 <script>
   import { FallingTextAnimator } from "../../scripts/fallingText";
 
-  document.addEventListener("astro:page-load", () => {
+  // NOTE: If I use view transitions later, use astro:page-load instead
+  document.addEventListener("DOMContentLoaded", () => {
     const containers = document.querySelectorAll<HTMLElement>(
       "[data-falling-text]",
     );
