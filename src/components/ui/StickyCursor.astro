@@ -21,7 +21,7 @@
 <script>
   import { StickyCursorManager } from "../../scripts/stickyCursor";
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const cursorEl = document.getElementById("sticky-cursor");
     if (cursorEl) {
       new StickyCursorManager(cursorEl);
