@@ -1,0 +1,52 @@
+---
+interface Props {
+  text: string;
+  delay?: number;
+  class?: string;
+}
+
+const { text, delay = 1000, class: className = "" } = Astro.props;
+
+const characters = text.split("");
+---
+
+<h1
+  class:list={["falling-text-wrapper", className]}
+  aria-label={text}
+  data-falling-text
+  data-delay={delay}
+>
+  {
+    characters.map((char) => {
+      <span aria-hidden="true" class="falling-char">
+        {char === " " ? "\u00A0" : char}
+      </span>;
+    })
+  }
+</h1>
+<style>
+  .falling-text-wrapper {
+    display: block;
+    line-height: 1;
+  }
+
+  .falling-char {
+    display: inline-block;
+    will-change: transform;
+    white-space: pre;
+  }
+</style>
+<script>
+  import { FallingTextAnimator } from "../../scripts/fallingText";
+
+  document.addEventListener("astro:page-load", () => {
+    const containers = document.querySelectorAll<HTMLElement>(
+      "[data-falling-text]",
+    );
+
+    containers.forEach((container) => {
+      const delay = parseInt(container.dataset.delay || "1000", 10);
+      new FallingTextAnimator(container, delay);
+    });
+  });
+</script>
